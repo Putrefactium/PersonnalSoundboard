@@ -1,63 +1,56 @@
 @font-face {
-    font-family: 'Code-Pro-Demo'; /* Nom de la police */
-    src:  url('code-pro-demo.ttf') format('truetype'); /* Format TTF */
+    font-family: 'Code-Pro-Demo'; 
+    src:  url('code-pro-demo.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
 
-body {
-    background-image: url('yohviralwp.jpg');
-    background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'arrière-plan */
-    background-repeat: repeat-y; 
-    /* Autres propriétés de style selon vos besoins */
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.hidden {
+    display: none;
 }
 
 .button-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
-    gap: 10px; /* Espace entre les boutons */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
     justify-items: center;
     margin-top: 20px;
 }
 
 .audio-button {
-    background: none; /* Supprime l'arrière-plan */
     position: relative;
-    font-size: 200%; /* Taille de police constante */
-    line-height: 100%;
-    font-family: 'Code-Pro-Demo';
+    font-size: 1.5rem; 
+    font-family: 'Code-Pro-Demo', sans-serif;
     color: white;
+    background-color: rgba(0, 0, 0, 0.5); 
     border: none;
-    border-radius: 5px;
+    border-radius: 10px; 
     cursor: pointer;
-    width: 100%; /* Les boutons remplissent leur cellule */
-    aspect-ratio: 2 / 1; /* Assure que la hauteur est égale à la largeur */
+    width: 100%; 
+    aspect-ratio: 2 / 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease, transform 0.1s ease; 
 }
 
-.audio-button .dark-overlay {
-    position: absolute;
-    top: 0;
-    left: 2;
-    width: 98%;
-    height: 100%;
-    object-fit: cover;
-    background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond semi-transparente */
-    transition: opacity 0.3s; /* Transition en douceur */
-    opacity: 1; /* Initialement transparent */
+.audio-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); 
 }
 
-.audio-button:hover .dark-overlay {
-    opacity: 0; /* Rendre la div sombre visible au survol */
+.audio-button.clicked {
+    transform: scale(0.55); 
 }
 
-.audio-button img {
-    width: 100%; /* Largeur de l'image à 100% de la largeur du bouton */
-    height: 100%; /* Hauteur de l'image à 100% de la hauteur du bouton */
-    object-fit: cover; 
-}
 
 .banner-container {
     display: flex;
@@ -71,47 +64,59 @@ body {
     height: auto;
 }
 
-.soundboard-image {
-    position: absolute; /* Positionnement absolu */
-    top: -10px; /* Ajuste la position verticale */
-    right: -10px; /* Ajuste la position horizontale */
-    width: 50px; /* Largeur de l'image */
-    height: 50px; /* Hauteur de l'image */
-}
-
-.volume-container {
-    position: fixed; /* Fixé par rapport à la fenêtre de visualisation */
-    bottom: 0; /* Ancré en bas de la fenêtre */
-    left: 50%;
-    transform: translateX(-50%); /* Centre horizontalement */
-    width: 100%; /* S'étend sur toute la largeur de la fenêtre */
-    background-color: rgba(255, 255, 255, 0.7); /* Couleur de fond semi-transparente */
-    color: white; /* Couleur du texte */
+.volume {
+    background: #f5f5f5;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0; /* Augmente l'espacement vertical */
-    z-index: 1000; /* Position au-dessus de tous les autres éléments */
-    transition: opacity 0.5s ease;
-}
-
-.volume-icon {
-    width: 48px; /* Largeur de l'icône */
-    height: 48px; /* Hauteur de l'icône */
-    margin-right: 10px; /* Espace entre l'icône et la barre de volume */
-}
-
-#volumeControl {
-    transition: opacity 0.5s ease;
-    margin-left: 10px;
-    width: 400px; /* Augmente la largeur de la barre de volume */
-    height: 20px; /* Augmente la hauteur de la barre de volume */
-}
-/* Ajouter ces styles pour masquer la barre de volume */
-#volumeControl.hidden {
-    transition: opacity 0.5s ease;
-    opacity: 0; /* Masquer l'élément avec une opacité de 0 */
-}
+    gap: 10px;
+    max-width: 400px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .volume input[type=range] {
+    display: none;
+  }
+  
+  .icon-size {
+    color: #000;
+    font-size: 48px;
+  }
+  
+  .bar-hoverbox {
+    padding: 10px 15px;
+    opacity: 0.7;
+    transition: opacity .2s;
+    
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+  
+  .bar {
+    background: #999;
+    height: 7px;
+    width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    pointer-events: none;
+    
+    .bar-fill {
+      background: #000;
+      width: 0%;
+      height: 100%;
+      background-clip: border-box;
+      pointer-events: none;
+    }
+  }
 
 
 /* Media queries pour les appareils mobiles */
