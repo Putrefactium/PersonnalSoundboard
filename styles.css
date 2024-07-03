@@ -131,12 +131,4 @@
         line-height: 100%;
         aspect-ratio: 2 / 1; /* Assure que la hauteur est égale à la largeur */
     }
-
-    body {
-        background-image: url('yohviralwp.jpg');
-        background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'arrière-plan */
-        background-repeat: repeat-y; /* Répète l'image verticalement */
-        background-position: center; /* Centre l'image de fond */
-        /* Autres propriétés de style selon vos besoins */
-    }
 }
